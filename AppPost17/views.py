@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Portafolio
+from .forms import FormularioContactanos
 
 # Create your views here.
 
@@ -28,3 +29,29 @@ def servicios(req):
 def quienes_somos(req):
 
     return render(req, "quienes_somos.html")
+
+def FormularioContactanos(req):
+
+    return render(req, "formulariocontactanos.html")
+
+
+# def cursoFormulario(req):
+
+    #print('method', req.method)
+   # print('POST', req.POST)
+
+   # if req.method == 'POST':
+
+   #     Contactanos = FormularioContactanos(req.POST)
+
+   #     if FormularioContactanos.is_valid():
+
+   #         data = FormularioContactanos.cleaned_data
+   #         curso = Nombre(nombre=data["curso"], camada=data["camada"])
+   #         curso.save()
+
+   #         return render(req, "inicio.html")
+   # else:
+
+   #     miFormulario = CursoFormulario()
+  #      return render(req, "cursoFormulario.html", {"miFormulario": miFormulario})

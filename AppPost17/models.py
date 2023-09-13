@@ -27,3 +27,14 @@ class Servicios(models.Model):
 
     def __str__(self):
         return f'{self.tipo} {self.costo} {self.descripcion}'
+
+class Contactanos(models.Model):
+
+    nombre = models.CharField(max_length=40)
+    apellido = models.CharField(max_length=40)
+    email= models.EmailField()
+    celular= models.IntegerField()
+    mensaje = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return f'{self.nombre} {self.apellido} {self.email} {self.celular} {self.mensaje}'
