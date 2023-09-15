@@ -20,5 +20,5 @@ from AppPost17.views import portafolio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('app-post17/', include('AppPost17.urls')),
+     path('', include('AppPost17.urls')),
    ]
