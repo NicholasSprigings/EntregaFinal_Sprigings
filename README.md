@@ -26,4 +26,4 @@ Se crean diferentes pestañas y las urls son las siguientes:
     path('editarPerfil/', editar_perfil, name="EditarPerfil"),
     ==> Es nuestra página en la que se puede realizar cambios a nuestro perfil.
 
-En este link se podrá encontrar un video con una breve explicación de nuestra web ==> 
+En este link se podrá encontrar un video con una breve explicación de nuestra web ==> https://youtu.be/Ol770OpMQ-c
