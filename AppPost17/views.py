@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import Portafolio
 from .forms import FormularioContactanos, UserEditForm
 
@@ -112,6 +113,7 @@ def register(req):
         miFormulario = UserCreationForm()
         return render(req, "registro.html", {"miFormulario": miFormulario})
 
+@login_required
 def editar_perfil(req):
 
     usuario = req.user
@@ -135,3 +137,14 @@ def editar_perfil(req):
     else:
         miFormulario = UserEditForm(instance=usuario)
         return render(req, "editarPerfil.html", {"miFormulario": miFormulario})
+
+def eliminar_usuario(req, id):
+
+    if req.method == 'POST':
+
+        usuario = usuario.objects.get(id=id)
+        usuario.delete()
+
+        usuario = usuario.objects.all()
+
+        return render(req, "login.html", {"usuario": usuario, "id": usuario.id})
