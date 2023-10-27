@@ -1,14 +1,11 @@
 {% extends 'padre.html' %}
 
 {% block contenidoQueCambia %}
-
-    <h1>Vista de Portafolio</h1>
-    <br>
-    <h2>Notable Publicidad</h2>
-    <h2>BMW</h2>
-    <br>
-    <h2>Video</h2>   
-    <br>
-    <p>La idea acá es poder subir videos sobre los trabajos realizados y ponerles una breve descripción</p>
-
+    <h1>Lista de Portafolios</h1>
+    <ul>
+        {% for portafolio in portafolios %}
+            <li>{{ portafolio.cliente }} - {{ portafolio.agencia }}</li>
+        {% endfor %}
+    </ul>
 {% endblock contenidoQueCambia %}
+

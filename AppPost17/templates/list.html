@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+    <h1>Lista de Portafolios</h1>
+    <ul>
+        {% for portafolio in portafolios %}
+            <li>{{ portafolio.cliente }} - {{ portafolio.agencia }}
+                <a href="{% url 'portafolio_update' portafolio.id %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'portafolio_delete' portafolio.id %}" class="btn btn-danger">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock contenidoQueCambia %}
+

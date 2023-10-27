@@ -1,22 +1,22 @@
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Portafolio
-from .forms import FormularioContactanos, UserEditForm
+from .forms import FormularioContactanos, UserEditForm, PortafolioForm
 
 # Create your views here.
 
-def portafolio(req, cliente, agencia):
+# def portafolio(req, cliente, agencia):
 
-    portafolio = Portafolio(cliente=cliente, agencia=agencia)
-    portafolio.save()
+    # portafolio = Portafolio(cliente=cliente, agencia=agencia)
+    # portafolio.save()
 
-    return HttpResponse(f"""
-    <p>Cliente: {portafolio.cliente} - Agencia: {portafolio.agencia} creado con éxito!</p>
-    """)   
+    # return HttpResponse(f"""
+    # <p>Cliente: {portafolio.cliente} - Agencia: {portafolio.agencia} creado con éxito!</p>
+    # """)   
 
 def inicio(req):
 
@@ -148,3 +148,39 @@ def eliminar_usuario(req, id):
         usuario = usuario.objects.all()
 
         return render(req, "login.html", {"usuario": usuario, "id": usuario.id})
+
+@login_required
+def portafolio_list(request):
+    portafolios = Portafolio.objects.all()
+    return render(request, 'list.html', {'portafolios': portafolios})
+
+@login_required
+def portafolio_create(request):
+    if request.method == 'POST':
+        form = PortafolioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('portafolio_list')  # Redirecciona a la lista de portafolios después de crear uno nuevo
+    else:
+        form = PortafolioForm()
+    return render(request, 'form.html', {'form': form})
+
+@login_required
+def portafolio_update(request, pk):
+    portafolio = Portafolio.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = PortafolioForm(request.POST, instance=portafolio)
+        if form.is_valid():
+            form.save()
+            return redirect('portafolio_list')  # Redirecciona a la lista de portafolios después de actualizar
+    else:
+        form = PortafolioForm(instance=portafolio)
+    return render(request, 'form.html', {'form': form})
+
+@login_required
+def portafolio_delete(request, pk):
+    portafolio = Portafolio.objects.get(pk=pk)
+    if request.method == 'POST':
+        portafolio.delete()
+        return redirect('portafolio_list')  # Redirecciona a la lista de portafolios después de eliminar
+    return render(request, 'delete.html', {'portafolio': portafolio})

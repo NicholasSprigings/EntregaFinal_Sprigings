@@ -14,4 +14,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name="logout.html"), name="Logout"),
     path('editarPerfil/', editar_perfil, name="EditarPerfil"),
     path('eliminarusuario/<int:id>', eliminar_usuario, name="EliminarUsuario"),
+    path('portafolio/', portafolio_list, name='portafolio_list'),
+    path('portafolio/list/', portafolio_list, name='portafolio_list'),
+    path('portafolio/crear/', portafolio_create, name='portafolio_create'),
+    path('portafolio/editar/<int:pk>/', portafolio_update, name='portafolio_update'),
+    path('portafolio/eliminar/<int:pk>/', portafolio_delete, name='portafolio_delete'),
 ]

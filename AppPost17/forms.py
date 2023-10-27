@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
-from .models import Contactanos
+from .models import Contactanos, Portafolio 
 
 # class FormularioContactanos(forms.Form):
 
@@ -40,3 +40,11 @@ class UserEditForm(UserChangeForm):
         if password1 != password2:
             raise forms.ValidationError("Las contraseñas no coinciden!!!!")
         return password2
+
+class PortafolioForm(forms.ModelForm):
+    class Meta:
+        model = Portafolio
+        fields = ['cliente', 'agencia']
+
+
+
